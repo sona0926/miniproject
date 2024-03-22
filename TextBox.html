@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="textBox.css">
+	<title>text box</title>
+</head>
+<body>
+	<h1 align="center" class="heading">Text Box</h1>
+	<div class="container" align="center">
+		<form class="textboxform">
+			<label>Enter your text below</label>
+			<br><br>
+			<textarea id="text" rows="10" cols="60" onkeyup="updateInfo()" autofocus></textarea><br><br>
+			<button type="button" onclick="transformUpperCase()">UPPERCASE</button>
+			<button type="button" onclick="transformLowerCase()">LOWERCASE</button>
+			<button type="button" onclick="findText()">FIND</button>
+			<button type="button" onclick="changeColor()">CHANGECOLOR</button>
+			<button type="button" onclick="textUnderline()">UNDERLINE</button>
+			<button type="button" onclick="copyText()">COPY</button>
+			<button type="button" onclick="changeFont()">CHANGEFONT</button>
+			<button type="button" onclick="makeBold()">BOLD</button>
+			<button type="button" onclick="clearText()">CLEARTEXT</button>
+			<button type="button" onclick="reverseText()">REVERSE</button>
+			<button type="button" onclick="pasteText()">PASTE</button>
+			<br><br>
+			<h2 id="textinfo">this text contains 0 words 0 characters</h2>
+		</form>
+	</div>
+	<script type="text/javascript">
+		let text=document.getElementById("text");
+		let textInfo=document.getElementById("textinfo");
+		let clr;
+		function transformUpperCase(){
+			text.value=text.value.toUpperCase();
+		}
+		function transformLowerCase() {
+			text.value=text.value.toLowerCase();
+		}
+		function clearText(){
+			document.getElementById("text").value="";
+		}
+		function reverseText(){
+			let textbox=document.getElementById("text");
+			textbox.value=textbox.value.split('').reverse().join('');
+		}
+		function pasteText(){
+			let pasteLine=document.getElementById("text");
+			pasteLine.focus();
+			document.execCommand("paste");
+			alert("Text paste");
+		}
+
+		
+		function findText() {
+			let searchText=prompt("Enter the text:  ");
+			if(text.value.includes(searchText))
+			{
+				alert(`search text"${searchText}" is present`);
+			}else{
+				alert(`search text "${searchText}" is not present`);
+			}
+		}
+		function changeColor() {
+			clr=prompt(("Enter your fav color :  ").toLowerCase())
+			text.style.color=clr;
+		}
+		function textUnderline(){
+			let makeUnderline=document.getElementById("text");
+			makeUnderline.style.textDecoration="underline";
+		}
+		function updateInfo(){
+			let numberOfwords=text.value.trim().split(" ").length
+
+			textInfo.innerHTML=`this text contains ${
+				numberOfwords} words and ${text.value.length} characters`
+		}
+		function copyText() {
+			let textCopy=document.getElementById("text");
+			textCopy.select();
+			document.execCommand("copy");
+			alert("Text copied!");
+		}
+		function makeBold(){
+			let boldText=document.getElementById("text");
+			boldText.style.fontWeight="bold";
+		}
+		function changeFont(){
+			let fontChange=document.getElementById("text");
+			fontChange.style.fontFamily="Georgia";
+		}
+	</script>
+
+</body>
+</html>
